@@ -12,8 +12,9 @@ const prisma = new PrismaClient()
 async function main() {
 
   try {
-    const blogs: Blogs[] = await prisma.blogs.findMany()
-    console.log('queried thes blogs:', blogs)
+    let result = await prisma.$queryRaw`SELECT * FROM Blogs`;
+
+    console.log('queried thes blogs:', result)
   
   } catch(e) {
     console.log('error when quering:', e)
