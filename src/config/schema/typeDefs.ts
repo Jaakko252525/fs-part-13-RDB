@@ -25,5 +25,11 @@ export const typeDefs = `#graphql
   type Query {
     getBlogs: [Blog]
   }
+
+
+
+  type Mutation {
+    createBlog(id: String, author: String, url: String, title: String, likes: String): [Blog]
+  }
 `;
 
