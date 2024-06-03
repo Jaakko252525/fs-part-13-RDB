@@ -12,11 +12,10 @@ import express from 'express';
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer';
 import http from 'http';
 
-
-
 // graphql typedefs and resolvers
-import { typeDefs } from '../graphql/typeDefs';
-import { resolvers } from '../graphql/resolvers';
+import { typeDefs } from './schema/typeDefs.js';
+import { resolvers } from './schema/resolvers.js';
+
 
 interface MyContext {
   token?: string;
