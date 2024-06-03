@@ -1,15 +1,17 @@
 
 
-require('dotenv').config();
+import 'dotenv/config'
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+export const prisma = new PrismaClient()
 
 
-async function connectDB() {
+export async function connectDB() {
   try {
     let result = await prisma.$queryRaw`SELECT * FROM Blogs`;
     console.log('queried thes blogs:', result)
+
+    return result
   
   } catch(e) {
     console.log('error when quering:', e)
@@ -18,4 +20,10 @@ async function connectDB() {
 
 }
 
-module.exports = connectDB
+
+export async function conn() {
+  
+  return prisma
+}
+
+

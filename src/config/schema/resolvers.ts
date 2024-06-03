@@ -3,7 +3,7 @@
 
 
 
-
+import { connectDB } from '../database.js';
 
 // types
 import { blog, blogs }  from '../../types/blogs.js'
@@ -12,7 +12,15 @@ import { blog, blogs }  from '../../types/blogs.js'
 
 export const resolvers = {
     Query: {
-      blogs: (): blog[] => blogs
+
+      // get all blogs
+      getBlogs: () => {
+        console.log('inside resolver')
+
+        return connectDB()
+      },
+
+
     },
   };
 
