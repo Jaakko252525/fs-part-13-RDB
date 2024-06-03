@@ -1,7 +1,7 @@
 
 
 
-require('dotenv').config();
+import { config } from 'dotenv';
 import { PrismaClient, Blogs } from '@prisma/client'
 
 const prisma = new PrismaClient()
