@@ -27,6 +27,8 @@ export async function createBlog(id: String, author: String, url: String, title:
 
     console.log('sending this to db:', id, author, title)
 
+    console.log('\n')
+
     let result = await prisma.$queryRaw`INSER INTO Blogs (id, author, url, title, likes)
               VALUES (id, author, url, title, likes)
               `;
