@@ -3,10 +3,11 @@
 
 
 // functions for using database
-import { connectDB, createBlog } from '../database.js';
+import { connectDB, createBlogFunc } from '../database.js';
 
 // types
 import { blog, blogs }  from '../../types/blogs.js'
+
 
 
 
@@ -22,14 +23,26 @@ export const resolvers = {
 
 
     },
+
+
     Mutation: {
-      createBlog: async (id: string, author: string, url: string, title: string, likes:string) => {
 
 
-        createBlog(id, author, url, title, likes)
+      createBlog: async (_root: string, args: blog, _context: string) => {
+        const { id, author, url, title, likes } = args;
 
-        return connectDB()
-      },
+
+        // making object
+        const blogObj = { id, author, url, title, likes
+        }
+
+
+        // using function
+        await createBlogFunc(blogObj)
+
+
+        return "succesfull?"
+    },
 
 
     }

@@ -21,17 +21,16 @@ export async function connectDB() {
 }
 
 
-export async function createBlog(id: String, author: String, url: String, title: String, likes: String) {
+export async function createBlogFunc(blogObj: blog) {
 
   try {
 
-    console.log('sending this to db:', id, author, title)
+    console.log('sending this to db:', blogObj)
+
 
     console.log('\n')
 
-    let result = await prisma.$queryRaw`INSER INTO Blogs (id, author, url, title, likes)
-              VALUES (id, author, url, title, likes)
-              `;
+    let result = await prisma.$queryRaw`INSERT INTO Blogs (id, author, url, title, likes)  VALUES (blogObj) `;
 
     console.log('succes')
 
