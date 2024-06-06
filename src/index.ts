@@ -20,7 +20,9 @@ import http from 'http';
 import { typeDefs } from './config/schema/typeDefs.js';
 import { resolvers } from './config/schema/resolvers.js';
 
+// middleware for getting errors
 
+import 'express-async-errors'
 
 interface MyContext {
   token?: string;
@@ -41,15 +43,19 @@ const server = new ApolloServer<MyContext>({
 await server.start();
 
 
-app.use(
-  '/',
-  cors<cors.CorsRequest>(),
-  express.json(),
-
-
+app.use('/', cors<cors.CorsRequest>(), express.json(),
+    
   expressMiddleware(server, {
-    context: async ({ req }) => ({ token: req.headers.token }),
+    context: async ({ req }) => ({
+      
+      token: req.headers.token
+    
+    
+    }
+  ),
   }),
+
+
 );
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
