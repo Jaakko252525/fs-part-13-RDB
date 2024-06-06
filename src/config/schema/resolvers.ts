@@ -3,13 +3,15 @@
 
 
 // functions for using database
-import { connectDB, createBlogFunc } from '../database.js';
+import { connectDB, createBlogFunc, deleteBlog } from '../database.js';
 
 // types
 import { blog, blogs }  from '../../types/blogs.js'
 
 
-
+interface deleteType {
+  title: string
+}
 
 export const resolvers = {
     Query: {
@@ -27,7 +29,6 @@ export const resolvers = {
 
     Mutation: {
 
-
       createBlog: async (_root: string, args: blog, _context: string) => {
         const { id, author, url, title, likes } = args;
 
@@ -43,6 +44,20 @@ export const resolvers = {
 
         return "succesfull?"
     },
+
+    
+
+
+    deleteBlog: async (_root: string, args: deleteType, _context: string) => {
+
+      const { title } = args;
+
+      // using function
+      await deleteBlog(title)
+
+
+      return "succesfull?"
+  },
 
 
     }

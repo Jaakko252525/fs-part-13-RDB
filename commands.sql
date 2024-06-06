@@ -17,3 +17,4 @@ INSERT INTO Blogs (author, url, title, likes) VALUES
 
 
 
+('testi_1', 'testi_1', 'testi_1', 0);

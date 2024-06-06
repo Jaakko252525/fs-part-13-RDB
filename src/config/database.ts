@@ -40,3 +40,22 @@ export async function createBlogFunc(blogObj: blog) {
 }
 
 
+export async function deleteBlog(title:string) {
+
+
+  try {
+
+    let deleting = await prisma.$queryRaw`DELETE FROM Blogs WHERE title = ${title};`
+
+    return 'succes'
+    
+  } catch(err) {
+
+    console.log('error is:', err)
+
+
+  }
+
+}
+
+
