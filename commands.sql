@@ -18,3 +18,17 @@ INSERT INTO Blogs (author, url, title, likes) VALUES
 
 
 ('testi_1', 'testi_1', 'testi_1', 0);
+
+
+CREATE TABLE Users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255),
+    name VARCHAR(255) NOT NULL,
+    Role VARCHAR(255) NOT NULL
+);
+
+
+INSERT INTO Users (username, name, Role) VALUES 
+('Jaakko', 'jp', 'USER'),
+('pert', 'ti', 'USER');
+

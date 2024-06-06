@@ -19,11 +19,16 @@ export const typeDefs = `#graphql
     likes: String
   }
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
+  type User {
+    id: String
+    username: String
+    name: String
+  }
+
+
   type Query {
     getBlogs: [Blog]
+    getUsers: [User]
   }
 
 
@@ -32,6 +37,9 @@ export const typeDefs = `#graphql
     createBlog(id: String, author: String, url: String, title: String, likes: String): [Blog]
     deleteBlog(title:String): [Blog]
     updateBlog(title:String, author:String, nAuthor: String, nUrl: String, nTitle: String, nLikes: String): [Blog]
+    getSpecificUser(username: String): [User]
+    updateUser(username: String, nUsername: String, nName: String): User
+    createUser(username: String, name: String, Role: String): User
 
   }
 `;

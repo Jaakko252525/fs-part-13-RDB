@@ -3,10 +3,10 @@
 
 
 // functions for using database
-import { connectDB, createBlogFunc, deleteBlog, updateBlog } from '../../util/db.js';
+import { connectDB, createBlogFunc, deleteBlog, updateBlog, getUsers, getSpecificUser, updateUserInDB, createUserFunc } from '../../util/db.js';
 
 // types
-import { blog, blogs }  from '../../types/blogs.js'
+import { blog, blogs, User }  from '../../types/blogs.js'
 
 
 interface deleteType {
@@ -22,6 +22,23 @@ interface updateType {
   nLikes: String
 }
 
+interface userOBJWUname {
+  username: string
+
+}
+
+interface updateUser {
+  username: string,
+  nUsername: string,
+  nName: string
+}
+
+interface UserCreatino {
+  username: string,
+  name: string,
+  Role: string
+}
+
 
 
 export const resolvers = {
@@ -33,6 +50,11 @@ export const resolvers = {
 
         return connectDB()
       },
+
+      getUsers: () => {
+
+        return getUsers()
+      }
 
 
     },
@@ -80,15 +102,45 @@ export const resolvers = {
 
 
       return
+    },
+
+    getSpecificUser: async (_root: string, args: userOBJWUname, _context: string) => {
+
+      const { username } = args;
 
 
-    }
-
-    }
+      let specifUser = await getSpecificUser(username)
 
 
+
+      return specifUser
+
+    },
+
+    updateUser: async (_root: string, args: updateUser, _context: string) => {
     
-  };
+      const { username, nUsername, nName } = args;
 
 
+      let updateUser = await updateUserInDB(username, nUsername, nName)
 
+
+      return 'succes'
+
+
+    },
+
+    createUser: async (_root: string, args: UserCreatino, _context: string) => {
+      const { username, name, Role } = args;
+
+
+      // using function
+      await createUserFunc(username, name, Role)
+
+
+      return "succesfull?"
+  },
+
+  }
+
+}

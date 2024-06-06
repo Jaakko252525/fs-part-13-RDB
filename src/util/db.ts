@@ -85,6 +85,84 @@ export async function updateBlog(title:String, author:String, nAuthor: String, n
   
 }
 
+export async function getUsers() {
+
+
+
+  try {
+
+    let users = await prisma.$queryRaw`SELECT * FROM Users`
+
+
+    return users
+  } catch(err) {
+
+    console.log('error is:', err)
+
+    return
+
+  }
+
+
+
+}
+
+export async function getSpecificUser(username: string) {
+
+  try {
+
+    console.log('username quered:', username)
+
+    let specificUser = await prisma.$queryRaw`SELECT * FROM Users WHERE username = ${username}`
+
+    console.log('result:', specificUser)
+
+    return specificUser
+
+  } catch(err) {
+
+    console.log('error is:', err)
+
+  }
+
+}
+
+
+export async function updateUserInDB(username: String, nUsername: string, nName: string) {
+
+  try {
+
+    let result = await prisma.$queryRaw`UPDATE Users SET username = ${nUsername}, name = ${nName} WHERE username = ${username};`;
+
+    return result
+
+  } catch(err) {
+
+    console.log('error is:', err)
+  }
+
+
+
+}
+
+export async function createUserFunc(username: string, name: string, Role: string) {
+
+  try {
+
+
+
+    let result = await prisma.$queryRaw`INSERT INTO Users (username, name, Role) VALUES (${username}, ${name}, ${Role})`;
+
+    console.log('succes')
+
+    return result
+  
+  } catch(e) {
+    console.log('error when quering:', e)
+
+  }
+}
+
 
 
 
