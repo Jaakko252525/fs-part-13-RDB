@@ -25,12 +25,9 @@ export async function createBlogFunc(blogObj: blog) {
 
   try {
 
-    console.log('sending this to db:', blogObj)
 
 
-    console.log('\n')
-
-    let result = await prisma.$queryRaw`INSERT INTO Blogs (id, author, url, title, likes)  VALUES (blogObj) `;
+    let result = await prisma.$queryRaw`INSERT INTO Blogs (author, url, title, likes)  VALUES (${blogObj.author}, ${blogObj.url}, ${blogObj.title}, ${Number(blogObj.likes)}) `;
 
     console.log('succes')
 
