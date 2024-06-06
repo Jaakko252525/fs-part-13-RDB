@@ -3,7 +3,7 @@
 
 
 // functions for using database
-import { connectDB, createBlogFunc, deleteBlog } from '../database.js';
+import { connectDB, createBlogFunc, deleteBlog, updateBlog } from '../../util/db.js';
 
 // types
 import { blog, blogs }  from '../../types/blogs.js'
@@ -12,6 +12,17 @@ import { blog, blogs }  from '../../types/blogs.js'
 interface deleteType {
   title: string
 }
+
+interface updateType {
+  title: string,
+  author: string,
+  nAuthor: String,
+  nUrl: String,
+  nTitle: String,
+  nLikes: String
+}
+
+
 
 export const resolvers = {
     Query: {
@@ -59,6 +70,19 @@ export const resolvers = {
       return "succesfull?"
   },
 
+    updateBlog: async (_root: string, args: updateType, _context: string) => {
+
+      const { title, author, nAuthor, nTitle, nUrl, nLikes } = args;
+
+
+      await updateBlog(title, author, nAuthor, nTitle, nUrl, nLikes)
+
+
+
+      return
+
+
+    }
 
     }
 

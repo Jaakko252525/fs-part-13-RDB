@@ -21,6 +21,7 @@ import { typeDefs } from './config/schema/typeDefs.js';
 import { resolvers } from './config/schema/resolvers.js';
 
 
+
 interface MyContext {
   token?: string;
 }

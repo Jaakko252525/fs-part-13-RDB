@@ -31,6 +31,7 @@ export const typeDefs = `#graphql
   type Mutation {
     createBlog(id: String, author: String, url: String, title: String, likes: String): [Blog]
     deleteBlog(title:String): [Blog]
+    updateBlog(title:String, author:String, nAuthor: String, nUrl: String, nTitle: String, nLikes: String): [Blog]
 
   }
 `;

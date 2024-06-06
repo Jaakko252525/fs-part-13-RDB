@@ -2,13 +2,15 @@
 
 // prolly should import this?const { DATABASE_URL } = require('./config')
 
+import './config.js'
+
 import { PrismaClient } from '@prisma/client'
 import { blog } from '../types/blogs'
 
 export const prisma = new PrismaClient()
 
 
-async function connectDB() {
+export async function connectDB() {
   try {
     let result = await prisma.$queryRaw`SELECT * FROM Blogs`;
 
@@ -22,7 +24,7 @@ async function connectDB() {
 }
 
 
-async function createBlogFunc(blogObj: blog) {
+export async function createBlogFunc(blogObj: blog) {
 
   try {
 
@@ -41,7 +43,7 @@ async function createBlogFunc(blogObj: blog) {
 }
 
 
-async function deleteBlog(title:string) {
+export async function deleteBlog(title:string) {
 
 
   try {
@@ -60,4 +62,30 @@ async function deleteBlog(title:string) {
 }
 
 
-module.exports = { createBlogFunc, deleteBlog, connectDB }
+export async function updateBlog(title:String, author:String, nAuthor: String, nUrl: String, nTitle: String, nLikes: String)  {
+
+
+  try {
+
+    console.log('data coming in:', author, title, nAuthor, nLikes, nUrl, nTitle)
+
+    let updating = await prisma.$executeRaw`UPDATE Blogs SET author = ${nAuthor} , title = ${nTitle} , url = ${nUrl} , likes = ${Number(nLikes)}
+    WHERE author = ${author};`
+
+
+    return
+
+  } catch(err) {
+
+    console.log('error is:', err)
+
+  }
+
+
+  
+}
+
+
+
+
+
