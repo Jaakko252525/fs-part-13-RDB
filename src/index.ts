@@ -20,6 +20,9 @@ import http from 'http';
 import { typeDefs } from './config/schema/typeDefs.js';
 import { resolvers } from './config/schema/resolvers.js';
 
+
+
+
 // middleware for getting errors
 
 import 'express-async-errors'
@@ -47,16 +50,15 @@ app.use('/', cors<cors.CorsRequest>(), express.json(),
     
   expressMiddleware(server, {
     context: async ({ req }) => ({
-      
       token: req.headers.token
-    
-    
     }
   ),
   }),
-
-
 );
+
+
+
+
 
 await new Promise<void>((resolve) => httpServer.listen({ port: 4000 }, resolve));
 console.log(`🚀 Server ready at http://localhost:4000/`);
